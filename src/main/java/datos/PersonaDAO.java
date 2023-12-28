@@ -10,6 +10,7 @@ import static datos.Conexion.*;
 
 public class PersonaDAO {
     private static final String SQL_SELECT = "SELECT idpersona, nombre, apellido, email, telefono FROM persona";
+    private static final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, email, telefono) VALUES(?, ?, ?, ?)";
 
     public List<Persona> seleccionar() {
         Connection conn = null;
@@ -37,13 +38,39 @@ public class PersonaDAO {
             e.printStackTrace(System.out);
         } finally {
             try {
-                Conexion.close(rs);
-                Conexion.close(stmt);
-                Conexion.close(conn);
+                close(rs);
+                close(stmt);
+                close(conn);
             } catch (SQLException e) {
                 e.printStackTrace(System.out);
             }
         }
         return personas;
+    }
+
+    public int insertar(Persona persona) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int registros = 0;
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setString(1, persona.getNombre());
+            stmt.setString(2, persona.getApellido());
+            stmt.setString(3, persona.getEmail());
+            stmt.setString(4, persona.getTelefono());
+            registros = stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try {
+                close(stmt);
+                close(conn);
+            } catch (SQLException e) {
+                e.printStackTrace(System.out);
+            }
+        }
+        return registros;
     }
 }
