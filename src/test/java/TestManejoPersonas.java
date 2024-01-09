@@ -1,29 +1,31 @@
-import datos.PersonaDAO;
+import datos.PersonaJDBC;
 import domain.Persona;
 
 import java.util.List;
 
 public class TestManejoPersonas {
     public static void main(String[] args) {
-        PersonaDAO personaDao = new PersonaDAO();
+        PersonaJDBC personaJDBC = new PersonaJDBC();
 
         // Insertando un nuevo objeta de tipo Persona
 
 //        Persona personaNueva = new Persona("Pedro", "Manoto", "pedromanoto@gmail.com", "11213466677");
-//        personaDao.insertar(personaNueva);
+//        personaJDBC
+//       .insertar(personaNueva);
 
         // Modificar un objeto de persona existente
 
 //        Persona personaModificar = new Persona(8, "Pedro Mujica", "Manoto", "pedromanoto@gmail.com", "1129134422");
-//        personaDao.actualizar(personaModificar);
+//        personaJDBC
+//       .actualizar(personaModificar);
 
         // Eliminar un registro tipo Persona
 
         Persona eliminarPersona = new Persona(4);
-        personaDao.eliminar(eliminarPersona);
+        personaJDBC.eliminar(eliminarPersona);
 
         // Listado Personas
-        List<Persona> personas = personaDao.seleccionar();
+        List<Persona> personas = personaJDBC.seleccionar();
 
         personas.forEach(persona -> {
             System.out.println("Persona = " + persona);

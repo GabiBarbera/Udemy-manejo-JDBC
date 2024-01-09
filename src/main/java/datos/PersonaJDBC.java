@@ -8,7 +8,7 @@ import java.util.List;
 
 import static datos.Conexion.*;
 
-public class PersonaDAO {
+public class PersonaJDBC {
     private static final String SQL_SELECT = "SELECT idpersona, nombre, apellido, email, telefono FROM persona";
     private static final String SQL_INSERT = "INSERT INTO persona(nombre, apellido, email, telefono) VALUES(?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE persona SET nombre = ?, apellido = ?, email = ?, telefono = ? WHERE idpersona = ?";
@@ -19,7 +19,7 @@ public class PersonaDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Persona persona = null;
-        List<Persona> personas = new ArrayList<>();
+        List<Persona> personas = new ArrayList<Persona>();
 
         try {
             conn = getConnection();
